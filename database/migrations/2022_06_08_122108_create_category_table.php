@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category', function (Blueprint $table) {
-            $table->id();
+            $table->id('cat_id');
+            $table->string('cat_name');
+            $table->integer('post_count')->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

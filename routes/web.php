@@ -13,10 +13,10 @@ use App\Models\Post;
 
 /*  Frontend Controller
 --------------------------------------*/
-use App\Http\Controllers\frontend\HomeController;
-use App\Http\Controllers\frontend\AboutController;
-use App\Http\Controllers\frontend\ContactController;
-use App\Http\Controllers\frontend\ServicesController;
+// use App\Http\Controllers\frontend\HomeController;
+// use App\Http\Controllers\frontend\AboutController;
+// use App\Http\Controllers\frontend\ContactController;
+// use App\Http\Controllers\frontend\ServicesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,10 +52,10 @@ Route::get('superadmin/user/change-password',[AuthController::class, 'changePass
 /*  Frontend Routes
 --------------------------------------*/
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/contact', [ContactController::class, 'index']);
-Route::get('/services', [ServicesController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+// Route::get('/about', [AboutController::class, 'index']);
+// Route::get('/contact', [ContactController::class, 'index']);
+// Route::get('/services', [ServicesController::class, 'index']);
 
 
 

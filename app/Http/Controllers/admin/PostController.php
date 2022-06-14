@@ -34,7 +34,8 @@ class PostController extends Controller
             echo ($category->toArray()[0]['cat_id']);
             $cat_id = $category->toArray()[0]['cat_id'];
         } else {
-            Category::create()
+            Category::create();
+            
         }
 
         // $post = new Post;
