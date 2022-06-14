@@ -1,5 +1,5 @@
   <footer class="main-footer">
-      <strong>Copyright &copy; 2022 <a href="https://allpngfree.com">AllPNGFree</a>.</strong>
+      <strong>Copyright &copy; 2022 <a href="https://pngcity.com">PNGCity</a>.</strong>
       All rights reserved.
       <div class="float-right d-none d-sm-inline-block">
           <b>Version</b> 2.0
@@ -15,18 +15,18 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="{{ url('admin/plugins/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
-  <script src="{{ url('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- DataTables  & Plugins -->
-  <script src="{{ url('admin/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ url('admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ url('admin/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ url('admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <!-- Tags Input -->
-  <script src="{{ url('admin/plugins/tagsinput/tagsinput.js') }}"></script>
+  <script src="{{ url('admin_assets/plugins/tagsinput/tagsinput.js') }}"></script>
   <!-- AdminLTE App -->
-  <script src="{{ url('admin/dist/js/adminlte.js') }}"></script>
+  <script src="{{ url('admin_assets/dist/js/adminlte.js') }}"></script>
 
   <script>
         $(function() {

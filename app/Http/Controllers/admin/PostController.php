@@ -13,7 +13,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('admin.posts');
+        $posts = Post::all();
+        return view('admin.posts', compact('posts'));
     }
 
     public function addPost()
@@ -26,22 +27,15 @@ class PostController extends Controller
         echo "<pre>";
         // print_r($request->all());
 
-        $category = Category::where('cat_name', '=', "Festival")->get();
+        $post = new Post;
+        $post->post_title = $request->post_title;
+        $post->post_content = $request->post_content;
+        $post->post_status = $request->post_status;
+        $post->post_author = $request->post_author;
+        $post->post_date = $request->post_date;
+        $post->thumbnail = $request->thumbnail;
+        $post->post_category = $request->post_category;
+        $post->save();
 
-        if (count($category) > 0) {
-
-            print_r($category->toArray());
-            echo ($category->toArray()[0]['cat_id']);
-            $cat_id = $category->toArray()[0]['cat_id'];
-        } else {
-            Category::create();
-            
-        }
-
-        // $post = new Post;
-        // $post->post_title = $request['post_title'];
-        // $post->cat_id = $request['post_title'];
-        // $post->category = $request['category'];
-        // $post->post_title = $request['post_title'];
     }
 }

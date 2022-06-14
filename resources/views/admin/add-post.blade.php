@@ -47,7 +47,7 @@
                                                 id="category" data-catid="" placeholder="Enter category"
                                                 onkeyup="categoryList(this.value)">
                                             <div id="CategoryList" class="form-group">
-                                                <div class="CategoryItemBox">
+                                                 <div class="CategoryItemBox">
                                                     <span class="CategoryItem" data-catid="">Veer</span>
                                                 </div>
                                             </div>

@@ -5,7 +5,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <x-content-header title="Category"/>
+        <x-content-header title="Category" />
         <!-- /.content-header -->
 
         <!-- Main content -->
@@ -24,32 +24,32 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Thumb</th>
-                                            <th>Post title</th>
                                             <th>Category</th>
-                                            <th>Sub-Category</th>
+                                            <th>Posts</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Blog</td>
-                                            <td>Blog</td>
-                                            <td>Festival</td>
-                                            <td>Eid</td>
-                                            <td>true</td>
-                                            <td>
-                                                <nav class="nav  ">
-                                                    <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
-                                                            aria-hidden="true"></i></a>
-                                                    <a class="nav-link text-danger" href="#"><i class="fa fa-trash"
-                                                            aria-hidden="true"></i></a>
-                                                </nav>
-                                            </td>
-                                        </tr>
+                                        @php
+                                            $count = 0;
+                                        @endphp
+                                        @foreach ($categories as $category)
+                                            <tr>
+                                                <td>{{ ++$count }}</td>
+                                                <td>{{ $category->cat_name }}</td>
+                                                <td>{{ $category->post_count }}</td>
+                                                <td>true</td>
+                                                <td>
+                                                    <nav class="nav  ">
+                                                        <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
+                                                                aria-hidden="true"></i></a>
+                                                        <a class="nav-link text-danger" href="#"><i class="fa fa-trash"
+                                                                aria-hidden="true"></i></a>
+                                                    </nav>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
