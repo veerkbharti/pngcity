@@ -38,4 +38,15 @@ class PostController extends Controller
         $post->save();
 
     }
+
+    public function deletePost(Request $request)
+    {
+        $post = Post::find($request->id);
+        if ($post) {
+            $post->delete();
+            return response()->json(['success' => true, 'message' => 'Post deleted successfully']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Post not found']);
+        }
+    }
 }

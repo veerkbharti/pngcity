@@ -37,13 +37,10 @@ Route::get('/superadmin/post/add', [PostController::class, 'addPost']);
 Route::post('/superadmin/post/add', [PostController::class, 'createPost']);
 Route::get('/superadmin/post/edit', [PostController::class, 'editPost']);
 Route::get('/superadmin/post/update', [PostController::class, 'updatePost']);
-Route::get('/superadmin/post/delete', [PostController::class, 'deletePost']);
 
 Route::get('/superadmin/category', [CategoryController::class, 'index']);
-Route::get('/superadmin/category/add', [CategoryController::class, 'addPost']);
 Route::get('/superadmin/category/edit', [CategoryController::class, 'editPost']);
-Route::get('/superadmin/category/update', [CategoryController::class, 'updatePost']);
-Route::get('/superadmin/category/delete', [CategoryController::class, 'deletePost']);
+// Route::get('/superadmin/category/update', [CategoryController::class, 'updatePost']);
 
 Route::get('superadmin/user/login',[AuthController::class, 'index']);
 Route::get('superadmin/user/change-password',[AuthController::class, 'changePassword']);

@@ -21,7 +21,8 @@
                         <!-- /.card-header -->
 
                         <div class="card-body">
-                            <form action="{{url('/')}}/superadmin/post/add" enctype="multipart/form-data" method="post">
+                            <form action="{{ url('/') }}/superadmin/post/add" enctype="multipart/form-data"
+                                method="post">
                                 @csrf
                                 <div class="row mb-3 d-none">
                                     <div class="col-sm-12">
@@ -41,15 +42,22 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Category</label>
-                                            <input autocomplete="off" type="number" class="d-none" value=""
-                                                name="cat_id" id="categoryId">
-                                            <input type="text" autocomplete="off" class="form-control" name="category"
-                                                id="category" data-catid="" placeholder="Enter category"
-                                                onkeyup="categoryList(this.value)">
-                                            <div id="CategoryList" class="form-group">
-                                                 <div class="CategoryItemBox">
-                                                    <span class="CategoryItem" data-catid="">Veer</span>
+                                            <input class="form-control" autocomplete="off" type="text" disabled  value=""  name="post_category" id="post_category">
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-sm-10">
+                                                <input type="text" autocomplete="off" class="form-control" name="category"
+                                                    id="category" data-catid=""  placeholder="Enter category"
+                                                    onkeyup="categoryList(this.value)">
+                                                <div id="CategoryList" class="form-group">
+                                                    <div class="CategoryItemBox">
+                                                        <span class="CategoryItem" data-catid="">Veer</span>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-sm-1 mt-2 mt-sm-0">
+                                                <button type="button" class="btn btn-primary" id="addCategoryBtn" disabled
+                                                    onclick="addCategory()">Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -65,8 +73,8 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label>Meta Description *</label>
-                                            <textarea class="form-control" name="post_desc" id="post_desc" name="post_desc" cols="30" rows="4"></textarea>
+                                            <label>Post Content *</label>
+                                            <textarea class="form-control" name="post_content" id="post_content" name="post_content" cols="30" rows="4"></textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -33,21 +33,22 @@
                                     </thead>
                                     <tbody>
                                         @php
-                                            $count=0;
+                                            $count = 0;
                                         @endphp
                                         @foreach ($posts as $post)
                                             <tr>
-                                                <td>{{++$count}}</td>
-                                                <td>{{$post->thumbnail}}</td>
-                                                <td>{{$post->post_title}}</td>
-                                                <td>{{$post->category}}</td>
+                                                <td>{{ ++$count }}</td>
+                                                <td>{{ $post->thumbnail }}</td>
+                                                <td>{{ $post->post_title }}</td>
+                                                <td>{{ $post->category }}</td>
                                                 <td>true</td>
                                                 <td>
                                                     <nav class="nav  ">
                                                         <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
                                                                 aria-hidden="true"></i></a>
-                                                        <a class="nav-link text-danger" href="#"><i class="fa fa-trash"
-                                                                aria-hidden="true"></i></a>
+                                                        <a class="nav-link text-danger" href="#"><i
+                                                                class="fa fa-trash delete-post"
+                                                                data-postid="{{ $post->post_id }}"></i></a>
                                                     </nav>
                                                 </td>
                                             </tr>

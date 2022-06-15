@@ -44,8 +44,9 @@
                                                     <nav class="nav  ">
                                                         <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
                                                                 aria-hidden="true"></i></a>
-                                                        <a class="nav-link text-danger" href="#"><i class="fa fa-trash"
-                                                                aria-hidden="true"></i></a>
+                                                        <a class="nav-link text-danger" href="#"><i
+                                                                class="fa fa-trash delete-category"
+                                                                data-catid="{{ $category->cat_id }}"></i></a>
                                                     </nav>
                                                 </td>
                                             </tr>

@@ -16,13 +16,19 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ url('admin_assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('admin_assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <!-- Summernote  -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <!-- Tagsinput style -->
     <link rel="stylesheet" href="{{ url('admin_assets/plugins/tagsinput/tagsinput.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('admin_assets/dist/css/adminlte.min.css') }}">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{{ url('admin_assets/dist/css/custom-styles.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+    <div id="Success-Msg" class="Show-Msg alert alert-success" role="alert">veer</div>
     <div class="wrapper">
 
         <!-- Navbar -->
