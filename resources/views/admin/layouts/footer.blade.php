@@ -18,8 +18,8 @@
   <script src="{{ url('admin_assets/plugins/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
   <script src="{{ url('admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <!-- Summernote  -->
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  {{-- <!-- Summernote  -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
   <!-- DataTables  & Plugins -->
   <script src="{{ url('admin_assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ url('admin_assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -51,56 +51,6 @@
       //   })
 
 
-      function categoryList(search) {
-          const category = $("#category").val();
-          if (category === "") {
-              $('#addCategoryBtn').attr('disabled', true);
-          } else {
-              $('#addCategoryBtn').attr('disabled', false);
-          }
-          if (search === "") {
-              $("#CategoryList").hide();
-          } else {
-              $("#CategoryList").show();
-              $.ajax({
-                  url: "{{ url('/') }}/api/superadmin/category/list",
-                  type: "GET",
-                  data: {
-                      search,
-                  },
-                  success: function(data) {
-                      $('#CategoryList').html(data);
-                  }
-              });
-          }
-      }
-      // $("#CategoryList .CategoryItem")
-      $(document).on("click", "#CategoryList .CategoryItem", function() {
-          $("#category").val($(this).text());
-          $("#CategoryList").css("display", "none");
-      });
-
-      function addCategory() {
-          const category = $("#category").val();
-          $.ajax({
-              url: "{{ url('/') }}/api/superadmin/category/add",
-              type: "GET",
-              data: {
-                  category,
-              },
-              success: function(data) {
-                  var post_category = $("#post_category").val();
-                  if (post_category === "") {
-                      post_category = category;
-                  } else {
-                      post_category = $("#post_category").val() + "," + category;
-                  }
-                  $("#post_category").val(post_category);
-                  $("#category").val("");
-                  $('#addCategoryBtn').attr('disabled', true);
-              }
-          });
-      }
 
 
   </script>

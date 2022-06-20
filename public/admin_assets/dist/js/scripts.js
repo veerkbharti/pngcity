@@ -43,31 +43,7 @@ $(document).ready(function () {
             alert("This browser does not support FileReader.");
         }
     });
-    // ---------------For Load Category and SubCategory----------------
-    function loadData(type, categoryId) {
-        $.ajax({
-            url: "includes/load-catsub.php",
-            type: "POST",
-            data: {
-                type: type,
-                id: categoryId,
-            },
-            success: function (data) {
-                if (type == "subcatData") {
-                    $("#post-subCategory").html(data);
-                } else {
-                    $("#post-category").append(data);
-                }
-            },
-        });
-    }
-    loadData();
-    $("#post-category").on("change", function () {
-        var category = $("#post-category").val();
-        if (category != "") {
-            loadData("subcatData", category);
-        }
-    });
+
     //--------------For Adding Posts-------------
     $("#post-form").on("submit", function (e) {
         e.preventDefault();
@@ -89,55 +65,28 @@ $(document).ready(function () {
             },
         });
     });
-    // $(document).on("click", "#addpost", function (e) {
-    //   e.preventDefault();
-    //   $("#load-category").hide();
-    //   $("#load-user").hide();
-    //   $("#load-post").hide();
-    //   $("#add-post-form").show();
-    // });
-    //--------------For add new post button-------------
-    // $(document).on("click", "#add-new-post", function (e) {
-    //     e.preventDefault();
-    // });
-    //--------------***For Manage Posts***-------------
-    //--------------For Showing Posts-------------
-    // $("#managepost").on("click", function (e) {
-    //   e.preventDefault();
-    //   $("#load-category").hide();
-    //   $("#load-subcategory").hide();
-    //   $("#load-user").hide();
-    //   $("#add-post-form").hide();
-    //   $("#load-post").show();
-    //   $.ajax({
-    //     url: "managepost.php",
-    //     type: "POST",
-    //     success: function (data) {
-    //       $("#load-post").html(data);
-    //     },
-    //   });
-    // });
+
     //--------------For Delete Posts-------------
     $(document).on("click", ".delete-post", function () {
-         if (confirm("Do you realy want to delete this post ?")) {
-             var post = this;
-             var id = $(post).data("postid");
-             $.ajax({
-                 url: `${HOSTNAME}/api/superadmin/post/delete`,
-                 type: "GET",
-                 data: {
-                     id,
-                 },
-                 success: function (res) {
-                     if (res.success === true) {
-                         $(post).closest("tr").fadeOut("slow");
-                         showmessage(res.message);
-                     } else {
-                         showmessage(res.message);
-                     }
-                 },
-             });
-         }
+        if (confirm("Do you realy want to delete this post ?")) {
+            var post = this;
+            var id = $(post).data("postid");
+            $.ajax({
+                url: `${HOSTNAME}/api/superadmin/post/delete`,
+                type: "GET",
+                data: {
+                    id,
+                },
+                success: function (res) {
+                    if (res.success === true) {
+                        $(post).closest("tr").fadeOut("slow");
+                        showmessage(res.message);
+                    } else {
+                        showmessage(res.message);
+                    }
+                },
+            });
+        }
     });
 
     //--------------For Delete category-------------
@@ -152,35 +101,110 @@ $(document).ready(function () {
                     id,
                 },
                 success: function (res) {
-                    if (res.success === true) {
-                        $(category).closest("tr").fadeOut("slow");
-                        showmessage(res.message);
-                    } else {
-                        showmessage(res.message);
-                    }
+                    console.log(res);
+                    $(category).closest("tr").fadeOut("slow");
+                    showmessage(res);
+                    // if (res.success === true) {
+                    // } else {
+                    //     showmessage(res.message);
+                    // }
                 },
             });
         }
     });
+
+    $(document).on("keyup", "#category", function () {
+        const search = $("#category").val();
+        if (search === "") {
+            $("#CategoryList").hide();
+            $("#addCategoryBtn").attr("disabled", true);
+        } else {
+            $.ajax({
+                url: `${HOSTNAME}/api/superadmin/category/list`,
+                type: "GET",
+                data: {
+                    search,
+                },
+                success: function (data) {
+                    $("#CategoryList").html(data);
+                    $("#CategoryList").show();
+                    $("#addCategoryBtn").attr("disabled", false);
+                },
+            });
+        }
+    });
+
+    $(document).on("click", "#addCategoryBtn", function () {
+        const category = $("#category").val();
+
+        $.ajax({
+            url: `${HOSTNAME}/api/superadmin/category/add`,
+            type: "GET",
+            data: {
+                category,
+            },
+            success: function (data) {
+                var post_category = $("#post_category").val();
+                if (post_category === "") {
+                    post_category = category;
+                } else {
+                    post_category = $("#post_category").val() + "," + category;
+                }
+                $("#post_category").val(post_category);
+                $("#category").val("");
+                $("#addCategoryBtn").attr("disabled", true);
+            },
+        });
+    });
+
+    $(document).on("click", "#CategoryList .CategoryItem", function () {
+        $("#category").val($(this).text());
+        $("#CategoryList").css("display", "none");
+    });
+
+    function addCategory() {
+        const category = $("#category").val();
+        $.ajax({
+            url: "{{ url('/') }}/api/superadmin/category/add",
+            type: "GET",
+            data: {
+                category,
+            },
+            success: function (data) {
+                var post_category = $("#post_category").val();
+                if (post_category === "") {
+                    post_category = category;
+                } else {
+                    post_category = $("#post_category").val() + "," + category;
+                }
+                $("#post_category").val(post_category);
+                $("#category").val("");
+                $("#addCategoryBtn").attr("disabled", true);
+            },
+        });
+    }
+
     //--------------For Add to home category button-------------
     $(document).on("click", ".cat-status-btn", function () {
         var Category = this;
         var catId = $(Category).data("id");
         var catStatus = $(Category).data("status");
         $.ajax({
-            url: "includes/change-cat-status.php",
-            type: "POST",
+            url: `${HOSTNAME}/api/superadmin/category/update`,
+            type: "GET",
             data: {
                 id: catId,
                 status: catStatus,
             },
             success: function (data) {
-                if (data == 1) {
-                    location.reload();
-                    // loadCategory();
+                console.log(data);
+                console.log(data.success);
+                if (data.success === true) {
+                    // location.reload();
+                    showmessage(data.message);
                 } else {
-                    location.reload();
-                    // loadCategory();
+                    // location.reload();
+                    showmessage(data.message);
                 }
             },
         });
@@ -255,79 +279,10 @@ $(document).ready(function () {
         }
     });
 
-    
     // ------For Dynamic Copyright Year---------
-    let d = new Date();
-    document.getElementById("copyright-year").innerHTML = d.getFullYear();
+    // let d = new Date();
+    // document.getElementById("copyright-year").innerHTML = d.getFullYear();
     //--------------For Error & Success Message--------------
 });
 
-// ------------***For Comments***--------------
-
-//--------------For Comment approved button-------------
-$(document).on("click", ".comment-status-btn", function () {
-    var Comment = this;
-    var commentId = $(Comment).data("id");
-    var commentStatus = $(Comment).data("status");
-    $.ajax({
-        url: "includes/change-comment-status.php",
-        type: "POST",
-        data: {
-            id: commentId,
-            status: commentStatus,
-        },
-        success: function (data) {
-            if (data == 1) {
-                location.reload();
-            } else {
-                location.reload();
-            }
-        },
-    });
-});
-// -------Add- Comments ----------
-$("#comment-form").on("submit", function (e) {
-    e.preventDefault();
-    var formData = new FormData(this);
-    $.ajax({
-        url: "includes/add-comment.php",
-        type: "POST",
-        data: formData,
-        mimeType: "multipart/form-data",
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            if (data == 1) {
-                $(this).trigger("reset");
-                showmessage("Thanks for comment");
-            } else alert(data);
-        },
-    });
-});
-
-//--------------For Delete comment-------------
-$(document).on("click", ".delete-comment", function () {
-    if (confirm("Do you realy want to delete this comment ?")) {
-        var comment = this;
-        var commentId = $(comment).data("cid");
-        var postId = $(comment).data("postid");
-        $.ajax({
-            url: "includes/delete-comment.php",
-            type: "POST",
-            data: {
-                id: commentId,
-                postId: postId,
-            },
-            success: function (data) {
-                if (data == 1) {
-                    $(comment).closest("tr").fadeOut("slow");
-                    showmessage("Comment Deleted Succussfully");
-                    // loadCategory();
-                } else {
-                    alert(data);
-                }
-            },
-        });
-    }
-});
 // Download Counts

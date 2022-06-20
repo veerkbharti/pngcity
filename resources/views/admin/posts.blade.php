@@ -27,7 +27,6 @@
                                             <th>Thumb</th>
                                             <th>Post title</th>
                                             <th>Category</th>
-                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -40,12 +39,23 @@
                                                 <td>{{ ++$count }}</td>
                                                 <td>{{ $post->thumbnail }}</td>
                                                 <td>{{ $post->post_title }}</td>
-                                                <td>{{ $post->category }}</td>
-                                                <td>true</td>
+                                                <td>{{ $post->post_category }}</td>
+                                                {{-- <td>
+                                                    <a href="{{route('')}}">
+                                                        <label class='switch cat-status-btn mt-2'
+                                                            data-status={{ $post->post_status }}
+                                                            data-id={{ $post->post_id }}>
+                                                            <input type='checkbox'
+                                                                {{ $post->post_status == 1 ? 'checked' : '' }}><span
+                                                                class='slider round'></span>
+                                                        </label>
+                                                    </a>
+                                                </td> --}}
                                                 <td>
                                                     <nav class="nav  ">
-                                                        <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
-                                                                aria-hidden="true"></i></a>
+                                                        <a class="nav-link text-primary"
+                                                            href="{{ route('post.edit', ['id' => $post->post_id]) }}"><i
+                                                                class="fa fa-edit" aria-hidden="true"></i></a>
                                                         <a class="nav-link text-danger" href="#"><i
                                                                 class="fa fa-trash delete-post"
                                                                 data-postid="{{ $post->post_id }}"></i></a>

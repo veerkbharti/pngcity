@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('cat_id');
             $table->string('cat_name');
             $table->integer('post_count')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->boolean('cat_status')->default(true);
             $table->timestamps();
         });
     }

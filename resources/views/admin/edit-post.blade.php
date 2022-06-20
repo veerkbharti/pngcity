@@ -21,7 +21,7 @@
                         <!-- /.card-header -->
 
                         <div class="card-body">
-                            <form action="{{ url('/') }}/superadmin/post/add" enctype="multipart/form-data"
+                            <form action="{{ route('post.update',['id'=>$post->post_id]) }}" enctype="multipart/form-data"
                                 method="post">
                                 @csrf
                                 <div class="row mb-3 d-none">
@@ -35,7 +35,7 @@
                                     <div class="col-sm-12">
                                         <h4>Post Title</h4>
                                         <input autocomplete="off" type="text" placeholder="Enter post title"
-                                            value="{{ old('post_title') }}" class="form-control form-control-lg"
+                                            value="{{ $post->post_title }}" class="form-control form-control-lg"
                                             name="post_title" id="">
                                         <span class="text-danger">
                                             @error('post_title')
@@ -48,8 +48,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Category</label>
-                                            <input class="form-control" autocomplete="off" type="text" readonly
-                                                value="{{ old('post_category') }}" name="post_category"
+                                            <input class="form-control" autocomplete="off" type="text"
+                                                value="{{ $post->post_category }}" name="post_category"
                                                 id="post_category">
                                             <span class="text-danger">
                                                 @error('post_category')
@@ -61,8 +61,7 @@
                                             <div class="col-sm-10">
                                                 <input type="text" autocomplete="off" class="form-control" name="category"
                                                     id="category" data-catid="" placeholder="Enter category"
-                                                    {{-- onkeyup="categoryList(this.value)" --}}
-                                                    >
+                                                    onkeyup="categoryList(this.value)">
                                                 <div id="CategoryList" class="form-group">
                                                     <div class="CategoryItemBox">
                                                         <span class="CategoryItem" data-catid="">Veer</span>
@@ -70,7 +69,8 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-1 mt-2 mt-sm-0">
-                                                <button type="button" class="btn btn-primary" id="addCategoryBtn" disabled>Add</button>
+                                                <button type="button" class="btn btn-primary" id="addCategoryBtn" disabled
+                                                    onclick="addCategory()">Add</button>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                             <label for="">Tags</label>
                                             <input autocomplete="off" data-role="tagsinput" type="text"
                                                 class="form-control" name="post_tags" id="post_tags"
-                                                value="{{ old('post_tags') }}" aria-describedby="helpId"
+                                                value="{{ $post->post_tags }}" aria-describedby="helpId"
                                                 placeholder="Enter keywords">
                                             <span class="text-danger">
                                                 @error('post_tags')
@@ -93,7 +93,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Post Content *</label>
-                                            <textarea class="form-control" name="post_content" id="post_content" name="post_content" cols="30" rows="4">{{ old('post_content') }}</textarea>
+                                            <textarea class="form-control" name="post_content" id="post_content" name="post_content" cols="30" rows="4">{{ $post->post_content }}</textarea>
                                             <span class="text-danger">
                                                 @error('post_content')
                                                     {{ $message }}
@@ -106,7 +106,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Meta Title</label>
-                                            <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ old('meta_title') }}">
+                                            <input type="text" class="form-control" name="meta_title" id="meta_title" value="{{ $post->meta_title }}">
                                             <span class="text-danger">
                                                 @error('meta_title')
                                                     {{ $message }}
@@ -117,7 +117,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Meta Keywords</label>
-                                            <input type="text" class="form-control" name="meta_keywords" value="{{ old('meta_keywords') }}"
+                                            <input type="text" class="form-control" name="meta_keywords" value="{{ $post->meta_keywords }}"
                                                 id="meta_keywords">
                                             <span class="text-danger">
                                                 @error('meta_keywords')
@@ -133,8 +133,8 @@
                                         <div class="form-group">
                                             <label for="">Meta Description</label>
                                             <textarea rows="3"  class="form-control" name="meta_description"
-                                                id="meta_description">{{ old('meta_description') }}</textarea>
-                                            <span class="text-danger" >
+                                                id="meta_description">{{ $post->meta_description }}</textarea>
+                                            <span class="text-danger">
                                                 @error('meta_description')
                                                     {{ $message }}
                                                 @enderror

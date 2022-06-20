@@ -7,7 +7,9 @@
         <!-- Content Header (Page header) -->
         <x-content-header title="Category" />
         <!-- /.content-header -->
-
+        @if (session('success'))
+            <x-alert-message type="success" message="{{ session('success') }}" />
+        @endif
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -16,7 +18,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Total posts</h3>
+                                <h3 class="card-title">Total Category</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -25,38 +27,32 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Category</th>
-                                            {{-- <th>Posts</th> --}}
-                                            <th>Status</th>
+                                            <th>No of Posts</th>
+                                            <th>Add to Home</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                            $count = 0;
-                                        @endphp
+                                        @php($count = 0)
                                         @foreach ($categories as $category)
                                             <tr>
                                                 <td>{{ ++$count }}</td>
                                                 <td>{{ $category->cat_name }}</td>
-                                                {{-- <td>{{ $category->post_count }}</td> --}}
+                                                <td>{{ $category->no_of_posts }}</td>
                                                 <td>
-                                                    <a href="{{route('category.update',['id'=>$category->cat_id,'status'=>$category->cat_status])}}">
-                                                        <label class='switch cat-status-btn mt-2'
-                                                            data-status={{ $category->cat_status }}
-                                                            data-id={{ $category->cat_id }}>
-                                                            <input type='checkbox'
-                                                                {{ $category->cat_status == 1 ? 'checked' : '' }}><span
-                                                                class='slider round'></span>
-                                                        </label>
+                                                    <a href="{{ route('category.update', ['id' => $category->cat_id, 'status' => $category->status]) }}"
+                                                        class="btn btn-sm {{ $category->status == 1 ? 'btn-success' : 'btn-primary' }} ">
+
+                                                        {{ $category->status == 1 ? 'Added' : 'Add' }}
                                                     </a>
                                                 </td>
                                                 <td>
                                                     <nav class="nav  ">
-                                                        <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
-                                                                aria-hidden="true"></i></a>
-                                                        <a class="nav-link text-danger" href="#"><i
-                                                                class="fa fa-trash delete-category"
-                                                                data-catid="{{ $category->cat_id }}"></i></a>
+                                                        {{-- <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
+                                                                aria-hidden="true"></i></a> --}}
+                                                        <a class="nav-link btn btn-sm btn-danger "
+                                                            href="{{ route('category.delete', ['id' => $category->cat_id]) }}"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
                                                     </nav>
                                                 </td>
                                             </tr>

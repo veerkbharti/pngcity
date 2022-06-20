@@ -12,7 +12,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ url('admin_assets/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url('admin/dist/css/adminlte.min.css') }}">
 </head>
 
 <body class="hold-transition login-page">
@@ -84,7 +84,7 @@
         <!-- /.card -->
     </div>
     <!-- AdminLTE App -->
-    <script src="{{ url('admin_assets/dist/js/adminlte.js') }}"></script>
+    <script src="{{ url('admin/dist/js/adminlte.js') }}"></script>
 </body>
 
 </html>

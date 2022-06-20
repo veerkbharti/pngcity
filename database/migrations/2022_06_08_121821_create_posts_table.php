@@ -17,17 +17,19 @@ return new class extends Migration
             $table->id('post_id');
             $table->string('post_title', 1000);
             $table->string('post_content', 1000);
-            $table->text('category');
+            $table->text('post_category');
             $table->string('thumbnail', 1000);
             $table->string('post_slug', 1000);
             $table->integer('post_author');
-            $table->boolean('post_status')->default(true);
             $table->text('post_tags');
             $table->string('search_keywords');
-            $table->bigInteger('post_views');
-            $table->bigInteger('download_count');
-            $table->bigInteger('post_likes');
-            $table->bigInteger('post_shares');
+            $table->boolean('post_status')->default(true);
+
+            $table->bigInteger('post_views')->default(0);
+            $table->bigInteger('post_likes')->default(0);
+            $table->bigInteger('post_shares')->default(0);
+            $table->bigInteger('download_count')->default(0);
+
             $table->string('meta_title', 1000);
             $table->string('meta_description', 1000);
             $table->string('meta_keywords', 1000);
