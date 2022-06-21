@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 use function PHPUnit\Framework\isNull;
@@ -79,9 +80,11 @@ class PostController extends Controller
         $post->save();
 
         if ($post) {
-            return redirect()->route('post.add')->with('success', 'Post created successfully');
+            session()->flash('post-add-success', 'Post created successfully');
+            return redirect()->route('post.add');
         } else {
-            return redirect()->route('post.add')->with('error', 'Something went wrong');
+            session()->flash('post-add-error', 'Something went wrong');
+            return redirect()->route('post.add');
         }
     }
 
@@ -138,14 +141,25 @@ class PostController extends Controller
         }
     }
 
-    public function deletePost(Request $request)
+    // public function deletePost(Request $request)
+    // {
+    //     $post = Post::find($request->id);
+    //     if ($post) {
+    //         $post->delete();
+    //         return response()->json(['success' => true, 'message' => 'Post deleted successfully']);
+    //     } else {
+    //         return response()->json(['success' => false, 'message' => 'Post not found']);
+    //     }
+    // }
+    public function deletePost($id)
     {
-        $post = Post::find($request->id);
-        if ($post) {
-            $post->delete();
-            return response()->json(['success' => true, 'message' => 'Post deleted successfully']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Post not found']);
-        }
+        $post = Post::find($id);
+        if (!is_null($post)) $post->delete();
+
+        Storage::delete('public/thumbnails/' . $post->thumbnail);
+        Storage::delete('public/png/' . $post->png_file_path);
+
+        session()->flash('post-delete-success', 'Post deleted successfully');
+        return redirect('/superadmin/post');
     }
 }

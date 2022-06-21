@@ -78,6 +78,7 @@ $(document).ready(function () {
                     id,
                 },
                 success: function (res) {
+                    console.log(res);
                     if (res.success === true) {
                         $(post).closest("tr").fadeOut("slow");
                         showmessage(res.message);
@@ -100,7 +101,9 @@ $(document).ready(function () {
                 data: {
                     id,
                 },
+                dataType: "json",
                 success: function (res) {
+                    console.log("res.success");
                     console.log(res);
                     $(category).closest("tr").fadeOut("slow");
                     showmessage(res);
@@ -109,7 +112,21 @@ $(document).ready(function () {
                     //     showmessage(res.message);
                     // }
                 },
+                error: function (res) {
+                    console.log("res.fail");
+                    console.log(res);
+                },
             });
+            // .done(function (res) {
+            //     console.log("res done");
+            //     console.log(res);
+            //     console.log(res.data);
+            // })
+            // .fail(function (res) {
+            //     console.log("res fail");
+            //     console.log(res);
+            //     console.log(res.data);
+            // });
         }
     });
 
@@ -126,9 +143,13 @@ $(document).ready(function () {
                     search,
                 },
                 success: function (data) {
-                    $("#CategoryList").html(data);
-                    $("#CategoryList").show();
-                    $("#addCategoryBtn").attr("disabled", false);
+                    if (data == 0) {
+                        $("#CategoryList").hide();
+                        $("#addCategoryBtn").attr("disabled", false);
+                    } else {
+                        $("#CategoryList").html(data);
+                        $("#CategoryList").show();
+                    }
                 },
             });
         }
@@ -160,6 +181,7 @@ $(document).ready(function () {
     $(document).on("click", "#CategoryList .CategoryItem", function () {
         $("#category").val($(this).text());
         $("#CategoryList").css("display", "none");
+        $("#addCategoryBtn").attr("disabled", false);
     });
 
     function addCategory() {

@@ -7,7 +7,9 @@
         <!-- Content Header (Page header) -->
         <x-content-header title="Add-Post" />
         <!-- /.content-header -->
-
+@if (session('post-add-success'))
+            <x-alert-message type="success" message="{{ session('post-add-success') }}" />
+        @endif
         <!-- Main content -->
         <section class="content">
             <div class="row">

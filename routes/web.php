@@ -35,14 +35,23 @@ Route::get('/superadmin', [DashboardController::class, 'index'])->middleware('gu
 
 Route::group(['prefix' => '/superadmin/post', 'middleware' => ['guard']], function () {
     Route::get('/', [PostController::class, 'posts']);
-    Route::get('add', [PostController::class, 'addPost']);
-    Route::post('add', [PostController::class, 'createPost']);
+    Route::get('add', [PostController::class, 'addPost'])->name('post.add');
+    Route::post('add', [PostController::class, 'createPost'])->name('post.create');
     Route::get('edit/{id}', [PostController::class, 'editPost'])->name('post.edit');
     Route::post('update/{id}', [PostController::class, 'updatePost'])->name('post.update');
+    Route::get('delete/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 });
 
 
-Route::get('/superadmin/category', [CategoryController::class, 'index'])->middleware('guard');
+// Route::get('/superadmin/category', [CategoryController::class, 'index'])->middleware('guard');
+
+Route::group(['prefix' => '/superadmin/category', 'middleware' => ['guard']], function () {
+    Route::get('/', [CategoryController::class, 'index']);
+    // Route::get('add', [CategoryController::class, 'addCategory']);
+    // Route::post('load-category', [CategoryController::class, 'loadCategory']);
+    Route::get('delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category.delete');
+    // Route::get('update/{id}/{status}', [CategoryController::class, 'updateCategory'])->name('category.update');
+});
 
 
 Route::group(['prefix' => '/superadmin/user', 'middleware' => ['guard']], function () {

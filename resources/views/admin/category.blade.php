@@ -7,7 +7,9 @@
         <!-- Content Header (Page header) -->
         <x-content-header title="Category" />
         <!-- /.content-header -->
-
+        @if (session('success'))
+            <x-alert-message type="success" message="{{ session('success') }}" />
+        @endif
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -40,7 +42,8 @@
                                                 <td>{{ $category->cat_name }}</td>
                                                 {{-- <td>{{ $category->post_count }}</td> --}}
                                                 <td>
-                                                    <a href="{{route('category.update',['id'=>$category->cat_id,'status'=>$category->cat_status])}}">
+                                                    <a
+                                                        href="{{ route('category.update', ['id' => $category->cat_id, 'status' => $category->cat_status]) }}">
                                                         <label class='switch cat-status-btn mt-2'
                                                             data-status={{ $category->cat_status }}
                                                             data-id={{ $category->cat_id }}>
@@ -52,11 +55,11 @@
                                                 </td>
                                                 <td>
                                                     <nav class="nav  ">
-                                                        <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
-                                                                aria-hidden="true"></i></a>
-                                                        <a class="nav-link text-danger" href="#"><i
-                                                                class="fa fa-trash delete-category"
-                                                                data-catid="{{ $category->cat_id }}"></i></a>
+                                                        {{-- <a class="nav-link text-primary" href="#"><i class="fa fa-edit"
+                                                                aria-hidden="true"></i></a> --}}
+                                                        <a class="nav-link btn btn-sm btn-danger "
+                                                            href="{{ route('category.delete', ['id' => $category->cat_id]) }}"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
                                                     </nav>
                                                 </td>
                                             </tr>

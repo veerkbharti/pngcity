@@ -7,7 +7,10 @@
         <!-- Content Header (Page header) -->
         <x-content-header title="Posts" />
         <!-- /.content-header -->
-
+        @if (session('post-delete-success'))
+            <x-alert-message type="success" message="{{ session('post-delete-success') }}" />
+        @endif
+        
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -37,7 +40,9 @@
                                         @foreach ($posts as $post)
                                             <tr>
                                                 <td>{{ ++$count }}</td>
-                                                <td>{{ $post->thumbnail }}</td>
+                                                <td> <img src="{{ asset('storage/thumbnails/' . $post->thumbnail) }}"
+                                                        alt="{{ $post->post_title }}" class="img-rounded"
+                                                        style="width:60px;"></td>
                                                 <td>{{ $post->post_title }}</td>
                                                 <td>{{ $post->post_category }}</td>
                                                 {{-- <td>
@@ -56,9 +61,12 @@
                                                         <a class="nav-link text-primary"
                                                             href="{{ route('post.edit', ['id' => $post->post_id]) }}"><i
                                                                 class="fa fa-edit" aria-hidden="true"></i></a>
-                                                        <a class="nav-link text-danger" href="#"><i
+                                                        {{-- <a class="nav-link text-danger" href="#"><i
                                                                 class="fa fa-trash delete-post"
-                                                                data-postid="{{ $post->post_id }}"></i></a>
+                                                                data-postid="{{ $post->post_id }}"></i></a> --}}
+                                                        <a class="nav-link text-danger"
+                                                            href="{{ route('post.delete', ['id' => $post->post_id]) }}"><i
+                                                                class="fa fa-trash" aria-hidden="true"></i></a>
                                                     </nav>
                                                 </td>
                                             </tr>

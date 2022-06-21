@@ -26,15 +26,20 @@ class CategoryController extends Controller
         echo 1;
     }
 
-    public function deleteCategory(Request $request)
+    public function deleteCategory($id)
     {
-        $category = Category::find($request->id);
-        if ($category) {
-            $category->delete();
-            return response()->json(['success' => true, 'message' => 'Category deleted successfully']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Category not found']);
-        }
+        // $category = Category::find($request->id);
+        // if ($category) {
+        //     $category->delete();
+        //     return response()->json(['success' => true, 'message' => 'Category deleted successfully'],200);
+        // } else {
+        //     return response()->json(['success' => false, 'message' => 'Category not found'],200);
+        // }
+        $category = Category::find($id);
+        if (!is_null($category)) $category->delete();
+
+        session()->flash('success', 'Category deleted successfully');
+        return redirect('/superadmin/category');
     }
 
     public function updateCategory(Request $request)
@@ -63,7 +68,7 @@ class CategoryController extends Controller
                 $output .= '<span class="CategoryItem" data-catid="">' . $category->cat_name . '</span>';
             }
         } else {
-            $output .= '<span class="CategoryItem" data-catid="">No category found</span>';
+            $output = 0;
         }
         return response( $output, 200)->header('Content-Type', 'text/html');
     }
