@@ -13,10 +13,13 @@ use App\Models\Post;
 
 /*  Frontend Controller
 --------------------------------------*/
-// use App\Http\Controllers\frontend\HomeController;
-// use App\Http\Controllers\frontend\AboutController;
-// use App\Http\Controllers\frontend\ContactController;
-// use App\Http\Controllers\frontend\ServicesController;
+use App\Http\Controllers\frontend\AboutController;
+use App\Http\Controllers\frontend\FrontendPostController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\PrivacyController;
+use App\Http\Controllers\frontend\SearchController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,8 +72,8 @@ Route::post('/superadmin/login', [UserController::class, 'loginUser'])->name('us
 
 /*  Frontend Routes
 --------------------------------------*/
-
-// Route::get('/', [HomeController::class, 'index']);
-// Route::get('/about', [AboutController::class, 'index']);
-// Route::get('/contact', [ContactController::class, 'index']);
-// Route::get('/services', [ServicesController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/search', [SearchController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
+Route::get('/privacy', [PrivacyController::class, 'index']);
+Route::get('/post/{slug}', [FrontendPostController::class, 'index'])->name('post.slug');
