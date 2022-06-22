@@ -7,38 +7,35 @@
         </div>
         <div class="container">
             <div class="row px-lg-3 px-xl-5  gx-4 ">
-                @php
-                    $info = getImageInfo($post->thumbnail);
-                @endphp
                 <div class=" col-xl-9">
                     <div class="shadow">
                         <figure class=" bg-white">
                             <img itemprop="contentUrl" alt="{{ $post->post_title }}" title="{{ $post->post_title }}"
-                                src="{{ url('thumbnail/' . $post->thumbnail) }}" oncontextmenu="return false;" />
+                                src="{{ asset('/storage/thumbnails/' . $post->thumbnail) }}" oncontextmenu="return false;" />
                             <figcaption itemprop="caption description">
-                                {{ $post->post_desc }}
+                                {{ $post->post_content }}
                             </figcaption>
                         </figure>
                         <div class="social-share shadow">
                             <ul class="info_list p-0 m-0">
                                 <li><a target="_blank"
-                                        href="https://twitter.com/share?text={{ $post->post_title }}&url={{ url('post/' . $post->slug_url) }}"><i
+                                        href="https://twitter.com/share?text={{ $post->post_title }}&url={{ url('post/' . $post->post_slug) }}"><i
                                             class="fab fa-twitter-square" style="color: #03A9F4;"></i></a></li>
 
                                 <li><a target="_blank"
-                                        href="https://facebook.com/share.php?u={{ url('post/' . $post->slug_url) }}&p[title]={{ $post->post_title }}"><i
+                                        href="https://facebook.com/share.php?u={{ url('post/' . $post->post_slug) }}&p[title]={{ $post->post_title }}"><i
                                             class="fab fa-facebook-square" style="color: #3F51B5;"></i></a></li>
 
                                 <li><a target="_blank"
-                                        href="https://pinterest.com/pin/create/button/?url={{ url('post/' . $post->slug_url) }}&media={{ url('thumbnail/' . $post->thumbnail) }}&description={{ $post->post_title }}"><i
+                                        href="https://pinterest.com/pin/create/button/?url={{ url('post/' . $post->post_slug) }}&media={{ url('thumbnail/' . $post->thumbnail) }}&description={{ $post->post_title }}"><i
                                             class="fab fa-pinterest-square" style="color: #E60023;"></i></a></li>
 
                                 <li><a target="_blank"
-                                        href="https://api.whatsapp.com/send?text=<?php echo urlencode($post->post_title); ?> {{ url('post/' . $post->slug_url) }}"><i
+                                        href="https://api.whatsapp.com/send?text=<?php echo urlencode($post->post_title); ?> {{ url('post/' . $post->post_slug) }}"><i
                                             class="fab fa-whatsapp-square" style="color: #40C351;"></i></a></li>
 
                                 <li><a target="_blank"
-                                        href="https://www.tumblr.com/share/link?url={{ url('post/' . $post->slug_url) }}&amp;name={{ $post->post_title }}"><i
+                                        href="https://www.tumblr.com/share/link?url={{ url('post/' . $post->post_slug) }}&amp;name={{ $post->post_title }}"><i
                                             class="fab fa-tumblr-square" style="color: #304D6A;"></i></a></li>
                             </ul>
                         </div>
@@ -46,7 +43,7 @@
                             <h2 class="left_h2">Tags</h2>
                             <ul class="tag_ul cat-ul p-0">
                                 @php
-                                    $string = $post->tags;
+                                    $string = $post->post_tags;
                                     $tags = explode(',', $string);
                                 @endphp
                                 @foreach ($tags as $tag)
@@ -71,7 +68,7 @@
                                     </svg>
                                     <span>PNG Dimensions: </span>
                                 </span>
-                                <span class="info_detail">{{ $info['width'] . 'x' . $info['height'] }} px</span>
+                                <span class="info_detail">{{ $post->png_width . 'x' . $post->png_height }} px</span>
                             </li>
                             <li>
                                 <span class="info_title">
@@ -82,7 +79,7 @@
                                     </svg>
                                     <span>PNG File size: </span>
                                 </span>
-                                <span class="info_detail">{{ $info['size'] }}</span>
+                                <span class="info_detail">{{ toConvert($post->png_file_size) }}</span>
                             </li>
                             <li>
                                 <span class="info_title">
@@ -93,7 +90,7 @@
                                     </svg>
                                     <span>MIME type: </span>
                                 </span>
-                                <span class="info_detail">{{ $info['mime'] }}</span>
+                                <span class="info_detail">{{ $post->png_mime_type }}</span>
                             </li>
                             <span class="clear"></span>
                         </ul>
@@ -149,9 +146,7 @@
                                 </div>
                                 <div class="modal-footer d-flex justify-content-between">
                                     <a type="button" id="at-downloadx"
-                                        href="{{ url('png/' . convert_extension($post->thumbnail, 'png')) }}"
-                                        download="{{ url('png/' . convert_extension($post->thumbnail, 'png')) }}"
-                                        class="btn btn-primary text-white">Download</a>
+                                        href="{{ asset('/storage/png/' . $post->png_file_path) }}" download class="btn btn-primary text-white">Download</a>
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
@@ -174,8 +169,8 @@
                 @if ($post->post_id == $rpost->post_id)
                     @continue;
                 @endif
-                <x-image-card title="{{ $rpost->post_title }}" description="{{ $rpost->post_desc }}"
-                    url="{{ $rpost->slug_url }}" tags="{{ $rpost->tags }}" thumbnail="{{ $rpost->thumbnail }}" />
+                <x-image-card title="{{ $rpost->post_title }}" description="{{ $rpost->rpost_content }}"
+                    url="{{ $rpost->post_slug }}" tags="{{ $rpost->post_tags }}" thumbnail="{{ $rpost->thumbnail }}" pngWidth="{{$rpost->png_width}}" pngHeight="{{$rpost->png_height}}" pngFileSize="{{$rpost->png_file_size}}" />
             @endforeach
         </div>
     </section>

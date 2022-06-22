@@ -17,8 +17,8 @@
     <div class=" container-fluid gallery">
         @if (count($posts) > 0)
             @foreach ($posts as $post)
-                <x-image-card title="{{ $post->post_title }}" description="{{ $post->post_desc }}"
-                    url="{{ $post->slug_url }}" tags="{{ $post->tags }}" thumbnail="{{ $post->thumbnail }}" />
+                <x-image-card title="{{ $post->post_title }}" description="{{ $post->post_content }}"
+                    url="{{ $post->post_slug }}" tags="{{ $post->post_tags }}" thumbnail="{{ $post->thumbnail }}" pngWidth="{{$post->png_width}}" pngHeight="{{$post->png_height}}" pngFileSize="{{$post->png_file_size}}" />
             @endforeach
             <!-- Bottom to Top Button -->
             <a id="back-to-top" class="btn btn-light back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>

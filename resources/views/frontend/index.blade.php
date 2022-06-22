@@ -1,58 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.layouts.main')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="  free transparent background Clipart" />
-    <meta name="keywords" content="  ,clip art,studio background,animal png,flower png,free download" />
-    <meta name="author" content="Pintu Kumar - PTS">
-    <link rel="canonical" href="">
-
-    <meta property="og:title" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="{{ url('/') }}" />
-    <meta name="description"
-        content="All Types PNG image free download | Stylish hindi font clipart PNG download, poster designing PNG, banner editing png, Free PNG images download" />
-    <meta name="keywords"
-        content="free PNG,transparent background,free clipart,clip art,studio background,animal png,flower png,free download" />
-    <meta name="author" content="Pintu Kumar - PTS">
-    <title>AllPNGFree - All Types PNG image free download</title>
-    <!-- ---------------Favicon--------- -->
-    <link rel="shortcut icon" type="image/jpg" href="{{ url('/frontend/assets/images/favicon.png') }}" />
-    <!-- .............Custom CSS........ -->
-    <link rel="stylesheet" href="{{ url('/frontend/assets/css/style.css') }}" />
-    <!-- ...............Font Awesome...... -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <!-- ...........Bootstrap.......... -->
-    <link rel="stylesheet" href="admin/assets/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <script>
-        window.onload = function() {
-            document.getElementById('preloader').style.display = "none";
-            document.getElementById('home').style.display = "block";
-        }
-    </script>
-
-    <!-- Google Adesence verification code-->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1349261392519845"
-        crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div id="preloader">
-        <img src="{{ url('/frontend/assets/images/preloader.gif') }}" alt="preloader">
-    </div>
+@section('main-container')
     <div id="home">
+        {{-- <pre>
+        @php
+            print_r($categories);
+        @endphp --}}
         <!-- Header section starts -->
         <header class="container-fluid home-page">
             <div class="row">
                 <div class="col-lg-5 col-md-8 col-sm-7 m-auto">
                     <a href="{{ url('/') }}" class="logo d-inline-block"><img
-                            src="{{ asset('/storage/images/logo.png') }}" alt="logo"></a>
-                    <form class="search-bar d-flex" action="{{ url('/search?clipart=') }}  @php isset($_GET['clipart']) ? $_GET['clipart'] : ''; @endphp ">
+                            src="{{ asset('/storage/images/logo/pngcity_logo.png') }}" alt="logo"></a>
+                    <form class="search-bar d-flex"
+                        action="{{ url('/search?clipart=') }}  @php isset($_GET['clipart']) ? $_GET['clipart'] : ''; @endphp ">
                         <input class="px-3" type="search" required name="clipart"
                             placeholder="Search for free png clipart..." />
                         <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -72,7 +33,7 @@
             <ul class="cat-ul ">
                 <li><a href="{{ url('/') }}">All</a></li>
                 @foreach ($categories as $category)
-                    @if ($category->status == 1 && $category->no_of_posts > 0)
+                    @if ($category->cat_status == 1)
                         <li><a
                                 href="{{ url('/search') }}?clipart={{ $category->cat_name }}">{{ $category->cat_name }}</a>
                         </li>
@@ -89,7 +50,7 @@
             <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
                 <li><a class="dropdown-item" href="{{ url('/') }}">All</a></li>
                 @foreach ($categories as $category)
-                    @if ($category->status == 1 && $category->no_of_posts > 0)
+                    @if ($category->status == 1)
                         <li><a class='dropdown-item' href="{{ url('/') }}?png={{ $category->cat_name }}">
                                 {{ $category->cat_name }}</a></li>
                     @endif
@@ -101,16 +62,16 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1349261392519845"
                 crossorigin="anonymous"></script>
         <!-- Allpng horizontal -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1349261392519845"
-            data-ad-slot="8328426866" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1349261392519845" data-ad-slot="8328426866"
+            data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <!------------------- Gallery Section Start---------------------------------------->
         <div class=" container-fluid gallery">
             @foreach ($posts as $post)
-                <x-image-card  title="{{ $post->post_title }}" description="{{ $post->post_desc }}" url="{{ $post->slug_url }}"
-                     tags="{{ $post->tags }}" thumbnail="{{ $post->thumbnail }}" />
+                <x-image-card title="{{ $post->post_title }}" description="{{ $post->post_content }}"
+                    url="{{ $post->post_slug }}" tags="{{ $post->post_tags }}" thumbnail="{{ $post->thumbnail }}" pngWidth="{{$post->png_width}}" pngHeight="{{$post->png_height}}" pngFileSize="{{$post->png_file_size}}" />
             @endforeach
         </div>
 
@@ -124,15 +85,17 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1349261392519845"
                 crossorigin="anonymous"></script>
         <!-- Allpng horizontal -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1349261392519845"
-            data-ad-slot="8328426866" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1349261392519845" data-ad-slot="8328426866"
+            data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-        @include('frontend.layouts.footer')
+        {{-- @include('frontend.layouts.footer') --}}
     </div>
+@endsection
 
-    <!-- Bottom to Top Button -->
+
+{{-- <!-- Bottom to Top Button -->
     <a id="back-to-top" class="btn btn-light back-to-top " role="button"><i class="fas fa-chevron-up"></i></a>
 
 
@@ -144,6 +107,6 @@
     <script src="{{ url('/frontend/assets/js/script.js') }}"></script>
     <!-- .........Bootstrap............... -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    </body>
 
-</html>
+    </html> --}}

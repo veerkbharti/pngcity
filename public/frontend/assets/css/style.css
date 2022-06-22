@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap");
 
 :root {
-  --logo-color-dark: #dd5500;
+  --logo-color-dark: #F900A0;
   --btn-ho-bg: #198754;
 }
 * {
@@ -26,7 +26,7 @@ meta {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 20px 0 rgba(0, 0, 0, 0.19);
 }
 /* --------------------Preloader---------------*/
-#home {
+#main-body {
   display: none;
 }
 #preloader {
@@ -44,7 +44,7 @@ meta {
 }
 /*----------------------- Header Section ---------------------*/
 header.home-page {
-  background: url(../images/hero_background.jpg);
+  background: url(../images/home_backgroung.jpg);
   background-size: cover;
   background-position: center center;
   text-align: center;

@@ -12,7 +12,7 @@ class SearchController extends Controller
     {
         $clipart = $request['clipart'] ?? "";
         if ($clipart != "")
-            $posts = Post::where('post_title', 'LIKE', "%$clipart%")->orwhere('tags', 'LIKE', "%$clipart%")->paginate(5);
+            $posts = Post::where('post_title', 'LIKE', "%$clipart%")->orwhere('post_tags', 'LIKE', "%$clipart%")->paginate(5);
         else
             $posts = Post::paginate(5);
         return view('frontend.search', compact('posts', 'clipart'));

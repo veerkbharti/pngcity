@@ -121,11 +121,13 @@ function get_basename($image)
     $only_name = basename($image, '.' . $extension); // remove extension
     return $only_name;
 }
+
 function title_to_dashed_title($title)
 {
     $sm_title = strtolower($title);
     return str_replace(" ", "-", $sm_title);
 }
+
 function toConvert($file_size)
 {
     if ($file_size < 1024) {
@@ -141,6 +143,8 @@ function toConvert($file_size)
         return $file_size;
     }
 }
+
+
 function add_random_text($text, $posts)
 {
     $characters = 'abcdefghijklmnopqrstuvwxyz';
